@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("user")
 public class UserController {
+    @CrossOrigin("*")
     @GetMapping("get-first-name")
     public String getFirstName() {
         return "Petar";
