@@ -20,6 +20,7 @@ public class UserController {
 
     @GetMapping("get-first-name-list")
     public List<String> getFirstNameList() {
+
         return List.of("Petar", "John");
     }
 
