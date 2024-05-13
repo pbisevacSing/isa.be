@@ -4,6 +4,7 @@ import com.example.demo.entities.User;
 import com.example.demo.models.UserModel;
 import com.example.demo.repositories.IUserRepository;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -13,13 +14,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("user")
+@RequiredArgsConstructor
 public class UserController {
-
-    private IUserRepository userRepository;
-
-    public UserController(IUserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final IUserRepository userRepository;
 
     @CrossOrigin("*")
     @GetMapping("get-first-name")
@@ -29,8 +26,7 @@ public class UserController {
 
     @GetMapping("get-first-name-list")
     public List<User> getFirstNameList() {
-        var results = userRepository.findAll();
-        return results;
+        return userRepository.findAll();
     }
 
     @PostMapping("create-user")
