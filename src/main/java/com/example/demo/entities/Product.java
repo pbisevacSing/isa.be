@@ -3,6 +3,8 @@ package com.example.demo.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Table(name = "products")
 @Data
@@ -14,4 +16,10 @@ public class Product {
     private String name;
     @Column(name = "user_id")
     private Integer userId;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "product_categories",
+            joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
+//    @JsonManagedReference
+    private List<Category> categories;
 }
