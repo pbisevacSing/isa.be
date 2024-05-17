@@ -2,8 +2,11 @@ package com.example.demo.controllers;
 
 import com.example.demo.entities.User;
 import com.example.demo.mappers.UserMapper;
+import com.example.demo.mappers.UserProductsMapper;
 import com.example.demo.models.UserModel;
 import com.example.demo.models.UserPageModel;
+import com.example.demo.models.UserProductsModel;
+import com.example.demo.repositories.IUserProductsRepository;
 import com.example.demo.repositories.IUserRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +25,7 @@ import java.util.List;
 @CrossOrigin("*")
 public class UserController {
     private final IUserRepository userRepository;
+    private final IUserProductsRepository userProductsRepository;
 
     @CrossOrigin("*")
     @GetMapping("get-first-name")
@@ -32,6 +36,11 @@ public class UserController {
     @GetMapping("get-user-list")
     public List<UserModel> getUserList() {
         return UserMapper.toModelList(userRepository.findAll());
+    }
+
+    @GetMapping("get-user-products-list")
+    public List<UserProductsModel> getUserProductsList() {
+        return UserProductsMapper.toModelList(userProductsRepository.findAll());
     }
 
     @GetMapping("get-user-page-list")

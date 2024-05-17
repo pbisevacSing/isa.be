@@ -1,8 +1,10 @@
 package com.example.demo.mappers;
 
 import com.example.demo.entities.User;
+import com.example.demo.entities.UserProducts;
 import com.example.demo.models.UserModel;
 import com.example.demo.models.UserPageModel;
+import com.example.demo.models.UserProductsModel;
 import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
@@ -17,7 +19,6 @@ public class UserMapper {
         user.setEmail(model.getEmail());
         return user;
     }
-
 
     public static UserModel toModel(User entity) {
         return UserModel.builder()
@@ -36,10 +37,12 @@ public class UserMapper {
     }
 
     public static UserPageModel toModelPagedList(Page<User> pageEntity) {
-       return UserPageModel.builder()
-               .Users(toModelList(pageEntity.getContent()))
-               .totalPages(pageEntity.getTotalPages())
-               .totalElements(pageEntity.getTotalElements())
-               .build();
+        return UserPageModel.builder()
+                .Users(toModelList(pageEntity.getContent()))
+                .totalPages(pageEntity.getTotalPages())
+                .totalElements(pageEntity.getTotalElements())
+                .build();
     }
+
+
 }

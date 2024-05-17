@@ -13,5 +13,5 @@ public class Product {
     @Column(name = "name")
     private String name;
     @Column(name = "user_id")
-    private String user_id;
+    private Integer userId;
 }
