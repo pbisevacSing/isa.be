@@ -30,7 +30,7 @@ public class UserController {
             var serviceNameTest1 = userService.getClass();
             var serviceNameTest2 = SpecificUserService.class;
 
-            if (userService.getClass().getName().equals("SpecificUserService"))
+            if (userService.getClass() == SpecificUserService.class)
             {
                 test = userService.getNameOfImplementer();
                 return test;
