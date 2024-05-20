@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements IUserService {
+public class SpecificUserService implements IUserService {
     private final IUserRepository userRepository;
     private final IUserProductsRepository userProductsRepository;
 
@@ -48,6 +48,6 @@ public class UserService implements IUserService {
 
     @Override
     public String getNameOfImplementer() {
-        return "THIS CLASSIC USER SERVICE";
+        return "THIS SPECIFIC USER SERVICE";
     }
 }

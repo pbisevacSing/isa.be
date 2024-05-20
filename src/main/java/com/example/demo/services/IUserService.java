@@ -12,4 +12,5 @@ public interface IUserService {
     UserPageModel findPagedList(PageRequest pageRequest);
     UserModel create(UserModel model);
     List<UserProductsModel> findUserProductsAll();
+    String getNameOfImplementer();
 }
