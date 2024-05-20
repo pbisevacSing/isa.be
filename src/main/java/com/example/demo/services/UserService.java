@@ -41,6 +41,15 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public UserModel update(UserModel model) {
+        var entity = UserMapper.toEntity(model);
+
+        var result = userRepository.save(entity);
+
+        return UserMapper.toModel(result);
+    }
+
+    @Override
     public List<UserProductsModel> findUserProductsAll() {
         var result = userProductsRepository.findAll();
         return UserProductsMapper.toModelList(result);
