@@ -6,9 +6,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IUserRepository extends JpaRepository<User, Integer> {
-    User findByEmail(String email);
+    Optional<User> findByEmail(String email);
 
     @Query(nativeQuery = true, value = "SELECT * FROM users WHERE first_name LIKE (%:firstName%)")
     List<User> findAllByFirstName(@Param("firstName") String firstName);
