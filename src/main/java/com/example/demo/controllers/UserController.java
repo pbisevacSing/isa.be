@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +25,8 @@ public class UserController {
 
     @GetMapping("get-list")
     public List<UserModel> getList() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
         return userService.findAll();
     }
 
