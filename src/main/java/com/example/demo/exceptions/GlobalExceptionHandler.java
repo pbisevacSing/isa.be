@@ -1,6 +1,9 @@
 package com.example.demo.exceptions;
 
 import com.example.demo.exceptions.user.UserAlreadyExistException;
+import com.example.demo.exceptions.user.UserException;
+import jakarta.validation.ValidationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
 import org.springframework.security.access.AuthorizationServiceException;
@@ -45,6 +48,36 @@ public class GlobalExceptionHandler {
         ProblemDetail errorDetail;
 
         errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), exception.getMessage());
+
+        return errorDetail;
+    }
+
+    @ExceptionHandler(ValidationException.class)
+    public ProblemDetail handleValidationException(ValidationException exception) {
+        ProblemDetail errorDetail;
+
+        errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(500), exception.getMessage());
+        errorDetail.setProperty("description", "Validation failed");
+
+        return errorDetail;
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ProblemDetail handleDataIntegrityViolationException(DataIntegrityViolationException exception) {
+        ProblemDetail errorDetail;
+
+        errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(500), exception.getMessage());
+        errorDetail.setProperty("description", "Validation failed");
+
+        return errorDetail;
+    }
+
+    @ExceptionHandler(UserException.class)
+    public ProblemDetail handleUserException(UserException exception) {
+        ProblemDetail errorDetail;
+
+        errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(500), exception.getMessage());
+        errorDetail.setProperty("description", "Wrong user data!");
 
         return errorDetail;
     }
