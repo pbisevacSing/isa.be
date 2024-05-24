@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.entities.User;
+import com.example.demo.exceptions.user.UserAlreadyExistException;
 import com.example.demo.models.LoginResponseModel;
 import com.example.demo.models.LoginUserModel;
 import com.example.demo.models.RegisterUserModel;
@@ -18,19 +19,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class AuthenticationController {
-    private final JwtService jwtService;
     private final AuthenticationService authenticationService;
 
     @PostMapping("/signup")
     public ResponseEntity<UserModel> register(@RequestBody RegisterUserModel registerUserDto) {
-        UserModel registeredUser = authenticationService.signup(registerUserDto);
-
-        return ResponseEntity.ok(registeredUser);
+        return ResponseEntity.ok(authenticationService.signup(registerUserDto));
     }
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseModel> authenticate(@RequestBody LoginUserModel loginUserDto) {
-        LoginResponseModel authenticatedUser = authenticationService.authenticate(loginUserDto);
-        return ResponseEntity.ok(authenticatedUser);
+        return ResponseEntity.ok(authenticationService.authenticate(loginUserDto));
     }
 }
