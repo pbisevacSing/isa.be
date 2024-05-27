@@ -38,11 +38,16 @@ public class UserService implements IUserService {
 
     @Override
     public UserModel create(UserModel model) {
-        var entity = UserMapper.toEntity(model, passwordEncoder);
+        var user = UserMapper.toEntity(model, passwordEncoder);
 
-        var result = userRepository.save(entity);
+        var existingUser = userRepository.findByEmail(model.getEmail());
 
-        return UserMapper.toModel(result);
+        if (existingUser.isPresent())
+            throw new UserAlreadyExistException("User with email " + model.getEmail() + " already exists");
+
+        var savedUser = userRepository.save(user);
+
+        return UserMapper.toModel(savedUser);
     }
 
     @Override
@@ -54,6 +59,12 @@ public class UserService implements IUserService {
         } catch (Exception e) {
             throw new UserException(e.getMessage());
         }
+    }
+
+    @Override
+    public void delete(Integer userId) {
+        var entity = userRepository.findById(userId).orElseThrow(() -> new UserException("User Not Found"));
+        userRepository.delete(entity);
     }
 
     @Override

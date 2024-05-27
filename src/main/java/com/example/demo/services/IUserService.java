@@ -12,5 +12,6 @@ public interface IUserService {
     UserPageModel findPagedList(PageRequest pageRequest);
     UserModel create(UserModel model);
     UserModel update(UserModel model);
+    void delete(Integer userId);
     List<UserProductsModel> findUserProductsAll();
 }
