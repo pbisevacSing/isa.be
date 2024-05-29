@@ -21,6 +21,9 @@ public class Token {
     @Column(unique = true)
     public String token;
 
+    @Column(unique = true, name = "refresh_token")
+    public String refreshToken;
+
     @Enumerated(EnumType.STRING)
     public TokenTypeEnum tokenType = TokenTypeEnum.BEARER;
 
