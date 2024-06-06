@@ -42,7 +42,7 @@ public class SecurityConfiguration {
                 .and()
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
+                .cors().configurationSource(corsConfigurationSource());
 
         return http.build();
     }
